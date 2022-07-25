@@ -42,21 +42,18 @@ const displaySnippets = () => {
 //  Helpers when craeting new snippets
 
 const snippetRow = (snippet) => {
-    // create a new div for each snippet
     const snippetDiv = document.createElement("div");
-    // add the snippet title to the div
     const snippetTitle = document.createElement("h4");
+    
     snippetTitle.innerHTML = snippet.title;
     snippetDiv.className = "single__snippet";
-
-    snippetDiv.appendChild(deleteButton());
     snippetDiv.appendChild(snippetTitle);
-    // add the snippet keywords to the div
+
     if (snippet.keywords.length > 0) {
         let snippetKeywordsDiv = keyWordsDiv(snippet);
         snippetDiv.appendChild(snippetKeywordsDiv);
     }
-    // add the snippet div to the container
+    snippetDiv.appendChild(deleteButton());
     return snippetDiv;
 }
 
