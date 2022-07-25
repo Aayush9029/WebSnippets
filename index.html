@@ -26,33 +26,31 @@
 
                     <div class="input-fields">
                         <div class="text-input-group">
-                            <input type="text" name="firstName" id="firstName" placeholder="*6818774040637"
+                            <input type="text" name="text" id="add-snippet-text" placeholder="https://www.twitch.tv/xqc"
                                 autocomplete="off" required="required">
-                            <label for="firstName">Copy Text</label>
+                            <label for="text">Text</label>
                         </div>
 
                         <div class="text-input-group">
-                            <input type="text" name="lastName" id="lastName" placeholder="flyclear, covid, transfer"
+                            <input type="text" name="keywords" id="add-snippet-keywords" placeholder="juice, twitch, stream"
                                 autocomplete="off" required="required">
-                            <label for="lastName">Key words</label>
+                            <label for="keywords">Key words</label>
                         </div>
-
                     </div>
-
-
                 </form>
-
             </div>
 
             <div class="card__footer">
-                <button><span>Add New Snippet</span></button>
-                <button class="tertiary"><span>Clear</span></button>
+                <button onclick="addNewSnippet()"><span>Add New Snippet</span></button>
             </div>
         </div>
     </div>
 
+    <div id="snippets-container"></div>
+
 </body>
 
 <script src="./js/main.js"></script>
+<script src="./js/theme.js"></script>
 
 </html>

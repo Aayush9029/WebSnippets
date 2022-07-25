@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+* {
+    padding: 0;
+    margin: 0;
+}
 body {
     --base1: #EBEFF3;
     --base2: #C3D0DB;
@@ -459,27 +463,69 @@ input[type=checkbox]:checked+label::after {
     background-color: transparent;
 }
 
+h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.snippet__delete__button {}
+
+.single__snippet {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--base3);
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s;
+}
+
+.single__snippet:hover {
+    background-color: var(--baseDark1);
+    color: var(--base2);
+    box-shadow: var(--base-shadow);
+    transform: translate(0, -6px);
+}
+
+.snippet__keywords__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.snippet__keyword {
+    margin: 0.5rem 0.5rem 0 0;
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--base2);
+    color: var(--baseDark1);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
 .card__title {
     margin-bottom: -25px;
 }
 
 .add__card {
+    display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
     position: absolute;
-    top: 0;
-    left: 0;
+    bottom: 0;
+        right: 0;
     margin: 25px;
     border-radius: 8px;
-    display: grid;
-    grid-gap: 10px;
-    max-width: 500px;
-    padding: 15px 20px;
+    padding: 15px;
     background: var(--base2);
     border: 2px solid var(--base3);
     transition: var(--shadow-transition);
+    width: 256px;
 }
 
 .add__card:hover {
-
     box-shadow: var(--input-shadow);
 }
 
@@ -491,9 +537,8 @@ input[type=checkbox]:checked+label::after {
 
 .card__footer {
     display: grid;
-    grid-gap: 20px;
-    grid-template-columns: auto auto;
-    justify-content: flex-start;
+    justify-content: center;
+        align-items: center;
 }
 
 form {
