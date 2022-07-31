@@ -1,0 +1,104 @@
+#search__bar {
+    width: 100%;
+    margin: 8% 5% 2% 5%;
+}
+
+h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.single__snippet {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--base3);
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s;
+}
+
+.single__snippet:hover {
+    background-color: var(--baseDark1);
+    color: var(--base2);
+    box-shadow: var(--base-shadow);
+    transform: translate(0, -6px);
+}
+
+.snippet__keywords__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.snippet__keyword {
+    margin: 0.5rem 0.5rem 0 0;
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--base2);
+    color: var(--baseDark1);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+
+.snippet__delete__button {
+    float: right;
+    width: fit-content;
+    margin: 0.5rem 0.5rem 0 0;
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.5rem;
+    background-color: rgb(255, 30, 0);
+    color: var(--base1);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s;
+}
+
+.snippet__delete__button:hover {
+    background-color: rgb(196, 23, 0);
+    cursor: pointer;
+    box-shadow: red 0px 0px 0px 1px;
+    transform: translate(0, 2px);
+}
+
+.card__title {
+    margin-bottom: -25px;
+}
+
+.add__card {
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 25px;
+    border-radius: 8px;
+    padding: 15px;
+    background: var(--base2);
+    border: 2px solid var(--base3);
+    transition: var(--shadow-transition);
+    width: 256px;
+}
+
+.add__card:hover {
+    box-shadow: var(--input-shadow);
+}
+
+.card__content {
+    max-width: 600px;
+    display: grid;
+    grid-gap: 20px;
+}
+
+.card__footer {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
