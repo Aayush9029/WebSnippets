@@ -150,12 +150,11 @@ const keyWordsDiv = (snippet) => {
 }
 
 const copySnippet = (e) => {
-    const snippet = e.target.parentElement;
-    const snippetText = snippet.children[0].innerHTML;
-    console.log(snippetText);
-    // use async clipboard API
-    navigator.clipboard.writeText(snippetText);
-
+  const snippet = e.target.parentElement;
+  const snippetText = snippet.children[0].innerHTML;
+  // console.log(snippetText);
+  // use async clipboard API
+  navigator.clipboard.writeText(snippetText);
 }
 
 const deleteSnippet = (e) => {
