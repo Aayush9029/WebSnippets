@@ -1,15 +1,30 @@
 let allSnippets = []; // array of all snippets
 let snippets = []; // filtered snippets
 
+let searchbar = document.getElementById("search__bar__input")
+
 const saveSnippets = () => {
     localStorage.setItem('snippets', JSON.stringify(allSnippets));
 }
 
 const addNewSnippet = () => {
     const title = document.getElementById("add-snippet-text");
+
+    // if the title is empty, don't add the snippet
+    if (title.value === "") {
+        return
+    }
+
+    // if title already exists, don't add it
+    if (allSnippets.find(snippet => snippet.title === title.value)) {
+        return
+    }
+
     const keywords = document.getElementById("add-snippet-keywords");
+
     // split the keywords into an array by comma
     const keywordsArray = keywords.value.trim().split(",");
+
     // remove whitespace from the keywords
     const keywordsArrayClean = keywordsArray.map((keyword) => {
         // remove blank keywords
@@ -19,21 +34,27 @@ const addNewSnippet = () => {
         return keyword.trim();
      }
     );  
-        // create a new snippet object
+
+
+    // create a new snippet object
     const newSnippet = {
         title: title.value,
         keywords: keywordsArrayClean,
     };
+
     // add the new snippet to the array
     snippets.push(newSnippet);
     allSnippets.push(newSnippet);
+    
+    // display the new snippet
+    displaySnippets();
+
     // save the new array to local storage
     saveSnippets();
+
     // clear the form
     title.value = "";
     keywords.value = "";
-    // display the new snippet
-    displaySnippets();
 }
 
 const displaySnippets = () => {
@@ -47,7 +68,7 @@ const displaySnippets = () => {
 
 const filterSnippets = () => {
     const options = {
-        isCaseSensitive: false,
+        // isCaseSensitive: false,
         // includeScore: false,
         shouldSort: true,
         // includeMatches: false,
@@ -77,7 +98,7 @@ const filterSnippets = () => {
       }
     }
 
-//  Helpers when craeting new snippets
+//  Helpers when creating snippets
 
 const snippetRow = (snippet) => {
     const snippetDiv = document.createElement("div");
@@ -130,39 +151,19 @@ const keyWordsDiv = (snippet) => {
 
 const copySnippet = (e) => {
     const snippet = e.target.parentElement;
-    // only coppy the snippet if it has keywords
-    if (snippet.children[1].children.length > 0) {
-        const snippetText = snippet.children[0].innerHTML;
-        const snippetKeywords = snippet.children[1].innerHTML;
-        const snippetTextToCopy = snippetText + " " + snippetKeywords;
-        copyToClipboard(snippetTextToCopy);
-    }
+    const snippetText = snippet.children[0].innerHTML;
+    console.log(snippetText);
+    // use async clipboard API
+    navigator.clipboard.writeText(snippetText);
 
-    // copy the snippet text to the clipboard
-    const copyToClipboard = (text) => {
-        const textArea = document.createElement("textarea");
-        textArea.value = text;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand("copy");
-        textArea.remove();
-    }
-
-    // display a message that the snippet was copied
-    const message = document.createElement("div");
-    message.className = "snippet__message";
-    message.innerHTML = "Snippet copied to clipboard";
-    snippet.appendChild(message);
-    setTimeout(() => {
-        snippet.removeChild(message);
-    }
-    , 2000);
 }
 
 const deleteSnippet = (e) => {
     const snippetDiv = e.target.parentElement.parentElement;
-    const snippetIndex = snippets.findIndex(snippet => snippet.title === snippetDiv.children[0].innerHTML);
-    snippets.splice(snippetIndex, 1);
+    const snippetIndex = allSnippets.findIndex(snippet => snippet.title === snippetDiv.children[0].innerHTML);
+    allSnippets.splice(snippetIndex, 1);
+    const snippetIndex1 = snippets.findIndex(snippet => snippet.title === snippetDiv.children[0].innerHTML);
+    snippets.splice(snippetIndex1, 1);
     saveSnippets();
     displaySnippets();
 }
@@ -178,7 +179,6 @@ const loadSnippets = () => {
     displaySnippets();
 }
 
+// Event Listeners
 document.addEventListener("DOMContentLoaded", loadSnippets);
-
-let searchbar = document.getElementById("search__bar__input")
 searchbar.addEventListener("keyup", filterSnippets)
