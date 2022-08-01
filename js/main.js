@@ -1,7 +1,8 @@
-let snippets = [];
+let allSnippets = []; // array of all snippets
+let snippets = []; // filtered snippets
 
 const saveSnippets = () => {
-    localStorage.setItem('snippets', JSON.stringify(snippets));
+    localStorage.setItem('snippets', JSON.stringify(allSnippets));
 }
 
 const addNewSnippet = () => {
@@ -25,6 +26,7 @@ const addNewSnippet = () => {
     };
     // add the new snippet to the array
     snippets.push(newSnippet);
+    allSnippets.push(newSnippet);
     // save the new array to local storage
     saveSnippets();
     // clear the form
@@ -43,7 +45,37 @@ const displaySnippets = () => {
     });
 }
 
-
+const filterSnippets = () => {
+    const options = {
+        isCaseSensitive: false,
+        // includeScore: false,
+        shouldSort: true,
+        // includeMatches: false,
+        // findAllMatches: false,
+        minMatchCharLength: 1,
+        // location: 0,
+        // threshold: 0.6,
+        // distance: 100,
+        // useExtendedSearch: false,
+        // ignoreLocation: false,
+        // ignoreFieldNorm: false,
+        // fieldNormWeight: 1,
+        keys: [
+          "title",
+        "keywords"
+        ]
+      }; 
+      const fuse = new Fuse(snippets, options);
+      const pattern = document.getElementById("search__bar__input").value;
+    //   see if pattern is alphanumeric
+      if (pattern.length > 0) {
+            snippets = fuse.search(pattern).map(snippet => snippet.item);
+            displaySnippets();  
+      }else{
+        snippets = allSnippets;
+        displaySnippets();
+      }
+    }
 
 //  Helpers when craeting new snippets
 
@@ -125,9 +157,6 @@ const copySnippet = (e) => {
         snippet.removeChild(message);
     }
     , 2000);
-
-    
-
 }
 
 const deleteSnippet = (e) => {
@@ -144,8 +173,12 @@ const loadSnippets = () => {
     const savedSnippets = localStorage.getItem('snippets');
     if (savedSnippets) {
         snippets = JSON.parse(savedSnippets);
+        allSnippets = JSON.parse(savedSnippets);
     }
     displaySnippets();
 }
 
 document.addEventListener("DOMContentLoaded", loadSnippets);
+
+let searchbar = document.getElementById("search__bar__input")
+searchbar.addEventListener("keyup", filterSnippets)
